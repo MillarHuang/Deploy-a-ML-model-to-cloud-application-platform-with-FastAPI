@@ -1,7 +1,7 @@
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
-
+import joblib
 
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
@@ -68,6 +68,33 @@ def inference(model, X):
     """
     preds = model.predict(X)
     return preds
+
+
+def save_model(model, path):
+    """
+    The function to save the model to certain path
+
+    Inputs
+    ------
+    model : 
+        The model to save
+    path : str
+        The path to save
+    """
+    joblib.dump(model, path)
+
+
+def load_model(path):
+    """
+    The function to load the model
+
+    Inputs
+    ------
+    path : str
+        The path where model saved
+    """
+    model = joblib.load(path)
+    return model 
 
 
 def slice_performance(slices, data_test, y_test, preds):

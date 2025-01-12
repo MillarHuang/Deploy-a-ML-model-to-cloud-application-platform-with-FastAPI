@@ -18,8 +18,11 @@ data = {
         'hours-per-week': [40],
         'native-country': ['United-States']}
 r = requests.post("https://salary-classification-qvyc.onrender.com/inference/", data=json.dumps(data))
+print(f"Status code of POST is {r.status_code}")
 print(r.json())
 
 # Get request on the live API
 r = requests.get("https://salary-classification-qvyc.onrender.com/")
+print(f"Status code of GET is {r.status_code}")
 print(r.json())
+
