@@ -1,15 +1,15 @@
 from fastapi import FastAPI
 from typing import List
 from pydantic import BaseModel, Field, validator
-import joblib
+from ml.model import load_model
 import pandas as pd
 import numpy as np
 
 
 # Encoding categorical data using the fitted encoders
-encoder = joblib.load("./model/encoder.joblib")
-lb = joblib.load("./model/label_binarizer.joblib")
-model = joblib.load('./model/ML_model.pkl')
+encoder = load_model("./model/encoder.joblib")
+lb = load_model("./model/label_binarizer.joblib")
+mdoel = load_model("./model/ML_model.pkl")
 data = pd.read_csv("./Data/census_cleaned.csv")
 cat_features = [
     "workclass",

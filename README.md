@@ -27,7 +27,7 @@ In this repo, it includes three parts:
 
 3. model/
     * ML_model.pkl: the random forest model trained on census_cleaned.csv dataset.
-    * encoder.joblib: encoder fitted on training set.
+    * encoder.joblib: categorical encoder fitted on training set.
     * label_binarizer.joblib: binary encoder fitted on training set.
 
 4. train_model.py: 

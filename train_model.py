@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 import logging
 import pandas as pd
 from ml.data import process_data
-from ml.model import train_model, inference, compute_model_metrics, slice_performance
+from ml.model import train_model, inference, compute_model_metrics, save_model, slice_performance
 import joblib
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
 logger = logging.getLogger()
@@ -33,8 +33,8 @@ X_train, y_train, encoder, lb = process_data(
     train, categorical_features=cat_features, label="salary", training=True
 )
 # Save encoders
-joblib.dump(encoder, "model/encoder.joblib")
-joblib.dump(lb, "model/label_binarizer.joblib")
+save_model(encoder, "model/encoder.joblib")
+save_model(lb, "model/label_binarizer.joblib")
 
 # Process the test data with the process_data function.
 X_test, y_test, encoder, lb = process_data(
@@ -53,8 +53,10 @@ print(f"The model performance is with precision {precision}, recall {recall} and
 logger.info("Slice performance for categorical varaible 'workclass'")
 output = slice_performance(['workclass'], test, y_test, preds)
 print(output)
+with open('slice_output.txt', 'w') as f:
+    f.write(output.to_string(index=False))
 
 # Save the trained model using joblib
 logger.info("Save the model")
-joblib.dump(model, 'model/ML_model.pkl')
+save_model(model, 'model/ML_model.pkl')
 print("Model saved as 'ML_model.pkl'")
