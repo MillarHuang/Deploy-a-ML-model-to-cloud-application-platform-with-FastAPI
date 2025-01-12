@@ -5,8 +5,8 @@
 In this repo, it includes three parts:
 
 * Build a CI/CD pipeline: 
-    - CI: only when the code committed passes the tests, it can create a pull request to integrate to main branch
-    - CD: when the code is integrated to main branch, it wil automatically deploy the API on Render
+    - CI: only when the code committed passes the tests, it can create a pull request to integrate to the main branch
+    - CD: when the code is integrated to the main branch, it will automatically deploy the API on Render
 
 * Build a Machine learning model to classify the salary condition based on the census data provided, the code is provided in train_model.py
 
