@@ -1,7 +1,5 @@
-"""
-This workflow will install Python dependencies, run tests and lint with a single version of Python.
-If all tests are passed, it will be automatically deployed on Render.
-"""
+#This workflow will install Python dependencies, run tests and lint with a single version of Python.
+#If all tests are passed, it will be automatically deployed on Render.
 
 
 name: CI/CD
