@@ -23,20 +23,20 @@ cat_features = [
 ]
 # Declare the data object with its components and their type.
 class Inputdata(BaseModel):
-    age: List[int]
-    workclass: List[str]
-    fnlgt: List[int]
-    education: List[str]
-    education_num: List[int] = Field(..., alias="education-num")  # Alias to map the column name, ... makes this field required
-    marital_status: List[str] = Field(..., alias="marital-status") 
-    occupation: List[str]
-    relationship: List[str]
-    race: List[str]
-    sex: List[str]
-    capital_gain: List[int] = Field(..., alias="capital-gain")
-    capital_loss: List[int] = Field(..., alias="capital-loss")
-    hours_per_week: List[int] = Field(..., alias="hours-per-week")
-    native_country: List[str] = Field(..., alias="native-country")
+    age: List[int] = Field(examples=[54])
+    workclass: List[str] = Field(examples=['Private'])
+    fnlgt: List[int] = Field(examples=[308087])
+    education: List[str] = Field(examples=['Some-college'])
+    education_num: List[int] = Field(..., alias="education-num", examples=[10])  # Alias to map the column name, ... makes this field required
+    marital_status: List[str] = Field(..., alias="marital-status", examples=['Married-civ-spouse']) 
+    occupation: List[str] = Field(examples=['Adm-clerical'])
+    relationship: List[str] = Field(examples=['Husband'])
+    race: List[str] = Field(examples=['White'])
+    sex: List[str] = Field(examples=['Male'])
+    capital_gain: List[int] = Field(..., alias="capital-gain", examples=[0])
+    capital_loss: List[int] = Field(..., alias="capital-loss", examples=[0])
+    hours_per_week: List[int] = Field(..., alias="hours-per-week", examples=[40])
+    native_country: List[str] = Field(..., alias="native-country", examples=['United-States'])
 
     @validator('age')
     def age_range(cls,v):
@@ -110,23 +110,7 @@ class Inputdata(BaseModel):
         if not all(i in data['native-country'].unique() for i in v):
             raise ValueError(f"native_country must be one of the following: {', '.join(data['native-country'].unique())}")
         return v
-    class Config:
-        schema_extra = {
-                        'age': [54],
-                        'workclass': ['Private'],
-                        'fnlgt': [308087],
-                        'education': ['Some-college'],
-                        'education-num': [10],
-                        'marital-status': ['Married-civ-spouse'],
-                        'occupation': ['Adm-clerical'],
-                        'relationship': ['Husband'],
-                        'race': ['White'],
-                        'sex': ['Male'],
-                        'capital-gain': [0],
-                        'capital-loss': [0],
-                        'hours-per-week': [40],
-                        'native-country': ['United-States']
-                        }
+    
     
 # Initialize FastAPI instance
 app = FastAPI()
