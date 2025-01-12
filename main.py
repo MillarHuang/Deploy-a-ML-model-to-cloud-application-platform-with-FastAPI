@@ -1,15 +1,10 @@
 from fastapi import FastAPI
-# BaseModel from Pydantic is used to define data objects.
 from typing import List
 from pydantic import BaseModel, Field, validator
 import joblib
 import pandas as pd
 import numpy as np
-"""
-First: uvicorn web_test3:app --reload
-Second: run(to send the items from POST to API): python web_test3_sample_request.py
-Third: navigate to http://127.0.0.1:8000/items/23?count=2, where 23 is the item_id and 2 is the count, to retrieve the item sent
-"""
+
 
 # Encoding categorical data using the fitted encoders
 encoder = joblib.load("./model/encoder.joblib")
@@ -136,8 +131,5 @@ async def model_inference(item: Inputdata):
     X = np.concatenate([X_continuous, X_categorical], axis=1)
     output = model.predict(X)
     return {'Result':output.tolist()}
-# # POST that does model inference
-# @app.post("/inference/")
-# async def model_inference(item: Inputdata):
-#     return item
+
 
