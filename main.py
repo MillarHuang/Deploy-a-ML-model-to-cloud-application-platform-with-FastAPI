@@ -110,23 +110,29 @@ class Inputdata(BaseModel):
         if not all(i in data['native-country'].unique() for i in v):
             raise ValueError(f"native_country must be one of the following: {', '.join(data['native-country'].unique())}")
         return v
-    class Config:
-        schema_extra = {
-                        'age': [54],
-                        'workclass': ['Private'],
-                        'fnlgt': [308087],
-                        'education': ['Some-college'],
-                        'education-num': [10],
-                        'marital-status': ['Married-civ-spouse'],
-                        'occupation': ['Adm-clerical'],
-                        'relationship': ['Husband'],
-                        'race': ['White'],
-                        'sex': ['Male'],
-                        'capital-gain': [0],
-                        'capital-loss': [0],
-                        'hours-per-week': [40],
-                        'native-country': ['United-States']
-                        }
+    # Declare examples for a Pydantic model that will be added to the generated JSON Schema,
+    # and it will be used in the API docs.
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                'age': [54],
+                'workclass': ['Private'],
+                'fnlgt': [308087],
+                'education': ['Some-college'],
+                'education-num': [10],
+                'marital-status': ['Married-civ-spouse'],
+                'occupation': ['Adm-clerical'],
+                'relationship': ['Husband'],
+                'race': ['White'],
+                'sex': ['Male'],
+                'capital-gain': [0],
+                'capital-loss': [0],
+                'hours-per-week': [40],
+                'native-country': ['United-States']}
+            ]
+        }
+    }
     
 # Initialize FastAPI instance
 app = FastAPI()
