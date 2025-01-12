@@ -9,7 +9,7 @@ import numpy as np
 # Encoding categorical data using the fitted encoders
 encoder = load_model("./model/encoder.joblib")
 lb = load_model("./model/label_binarizer.joblib")
-mdoel = load_model("./model/ML_model.pkl")
+model = load_model("./model/ML_model.pkl")
 data = pd.read_csv("./Data/census_cleaned.csv")
 cat_features = [
     "workclass",
