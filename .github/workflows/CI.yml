@@ -1,4 +1,6 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
+#This workflow will install Python dependencies, run tests and lint with a single version of Python.
+#If all tests are passed, it will be automatically deployed on Render.
+
 
 name: CI/CD
 
@@ -36,3 +38,16 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+
+  CD:
+    name: Deploy
+    needs: [CI]
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy to production
+      uses: johnbeynon/render-deploy-action@v0.0.8
+      with:
+        service-id: ${{ secrets.MY_RENDER_SERVICE_ID }}
+        api-key: ${{ secrets.MY_RENDER_API_KEY }}
+
