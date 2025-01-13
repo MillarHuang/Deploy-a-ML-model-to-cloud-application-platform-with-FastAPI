@@ -43,7 +43,7 @@ jobs:
     name: Deploy
     needs: [CI]
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' # Ensures this job only runs on pull requests
+    if: github.event_name == 'push' # Ensures this job only runs on push on main branch requests
 
     steps:
     - name: Deploy to production
